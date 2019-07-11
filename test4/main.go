@@ -27,7 +27,7 @@ func lock(db *sql.DB){
 	}
 
 	var lock bool
-	if err := tx.QueryRow("select pg_try_advisory_xact_lock(1) FROM public.books").Scan(&lock); err != nil {
+	if err := tx.QueryRow("select pg_try_advisory_xact_lock(1)").Scan(&lock); err != nil {
 		tx.Rollback()
 	}
 	if !lock {
